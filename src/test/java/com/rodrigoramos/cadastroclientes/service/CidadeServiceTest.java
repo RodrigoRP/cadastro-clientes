@@ -13,6 +13,7 @@ import org.mockito.junit.MockitoJUnitRunner;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.time.Instant;
+import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.any;
@@ -41,5 +42,19 @@ public class CidadeServiceTest {
 
         verify(cidadeRepository).save(any(Cidade.class));
     }
+
+    @Test
+    public void findCidadeByNome() {
+
+        final Cidade cidade = new Cidade(null, "Lajeado", "RS");
+
+        given(cidadeRepository.findCidadeByNome(cidade.getNome())).willReturn(cidade);
+
+        final Cidade expected = cidadeService.findCidadeByNome(cidade.getNome());
+
+        assertThat(expected).isNotNull();
+    }
+
+
 
 }
