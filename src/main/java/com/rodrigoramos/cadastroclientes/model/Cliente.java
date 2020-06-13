@@ -17,6 +17,7 @@ public class Cliente {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String nomeCompleto;
+    private String cpf;
     private String sexo;
     private Instant dataNascimento;
     private Integer idade;

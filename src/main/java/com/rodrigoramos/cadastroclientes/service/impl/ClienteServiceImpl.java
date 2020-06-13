@@ -3,6 +3,7 @@ package com.rodrigoramos.cadastroclientes.service.impl;
 import com.rodrigoramos.cadastroclientes.model.Cliente;
 import com.rodrigoramos.cadastroclientes.repository.ClienteRepository;
 import com.rodrigoramos.cadastroclientes.service.ClienteService;
+import com.rodrigoramos.cadastroclientes.service.exceptions.ClienteRegistrationException;
 import com.rodrigoramos.cadastroclientes.service.exceptions.DataIntegrityException;
 import com.rodrigoramos.cadastroclientes.service.exceptions.ObjectNotFoundException;
 import lombok.AllArgsConstructor;
@@ -22,6 +23,10 @@ public class ClienteServiceImpl implements ClienteService {
 
     @Override
     public Cliente save(Cliente cliente) {
+        Optional<Cliente> clienteOptional = repository.findClienteByCpf(cliente.getCpf());
+        if (clienteOptional.isPresent()) {
+            throw new ClienteRegistrationException("Cliente com o CPF " + cliente.getCpf() + " já existe");
+        }
         return repository.save(cliente);
     }
 
@@ -54,17 +59,14 @@ public class ClienteServiceImpl implements ClienteService {
         }
     }
 
- /*   @Override
-    public List<Cliente> findAll() {
-        return repository.findAll();
-    }*/
+    @Override
+    public Cliente findClienteByCpf(String cpf) {
+        Optional<Cliente> cliente = repository.findClienteByCpf(cpf);
+
+        return cliente.orElseThrow(() -> new ObjectNotFoundException(
+                "Cliente não encontrado! CPF: " + cpf + ", Tipo: " + Cliente.class.getName()));
+    }
 
 
-//    @Override
-//    public Cliente update(Cliente cliente, ClienteUpdateDTO clienteUpdateDTO) {
-//
-//        JsonNullableUtils.changeIfPresent(clienteUpdateDTO.getNomeCompleto(), cliente::setNomeCompleto);
-//
-//        return cliente;
-//    }
+
 }

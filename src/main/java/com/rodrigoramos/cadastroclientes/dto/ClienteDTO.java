@@ -13,6 +13,7 @@ public class ClienteDTO {
 
     private String nomeCompleto;
     private String sexo;
+    private String cpf;
     private Instant dataNascimento;
     private Integer idade;
     private String cidade;

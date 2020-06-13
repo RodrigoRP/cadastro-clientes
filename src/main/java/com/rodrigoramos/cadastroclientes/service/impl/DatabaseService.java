@@ -24,8 +24,8 @@ public class DatabaseService {
         cidadeRepository.saveAll(Arrays.asList(c1, c2));
 
         Instant instant = Instant.now();
-        Cliente cl1 = new Cliente(null, "Maria da Silva", "F", instant, 19, c1);
-        Cliente cl2 = new Cliente(null, "Pedro da Silva", "M", instant, 89, c2);
+        Cliente cl1 = new Cliente(null, "Maria da Silva","123123", "F", instant, 19, c1);
+        Cliente cl2 = new Cliente(null, "Pedro da Silva", "M", "123123", instant, 89, c2);
 
 
         clienteRepository.saveAll(Arrays.asList(cl1, cl2));

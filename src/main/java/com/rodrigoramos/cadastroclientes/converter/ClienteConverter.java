@@ -19,6 +19,7 @@ public class ClienteConverter {
 
         Cliente cliente = new Cliente();
         cliente.setNomeCompleto(clienteDTO.getNomeCompleto());
+        cliente.setCpf(clienteDTO.getCpf());
         cliente.setDataNascimento(clienteDTO.getDataNascimento());
         cliente.setSexo(clienteDTO.getSexo());
         cliente.setIdade(clienteDTO.getIdade());

@@ -13,4 +13,6 @@ public interface ClienteRepository extends PagingAndSortingRepository<Cliente, L
     Optional<Cliente> findClienteByNomeCompleto(String nomeCompleto);
 
     List<Cliente> findAll();
+
+    Optional<Cliente> findClienteByCpf(String cpf);
 }

@@ -1,5 +1,7 @@
 package com.rodrigoramos.cadastroclientes.service;
 
+import com.rodrigoramos.cadastroclientes.model.Cliente;
+
 import java.util.List;
 
 public interface GenericService<E, M> {
@@ -9,6 +11,8 @@ public interface GenericService<E, M> {
     E findById(M id);
 
     E findByNomeCompleto(String nomeCompleto);
+
+    E findClienteByCpf(String cpf);
 
     List<E> findAll();
 
