@@ -7,14 +7,13 @@ jdk:
 git:
   depth: 2 #clone repository to a maximum depth of 2 commits
 
-# git strips the wrapper jar file so we have to force its download during the build
-install:
-  - mvn -N io.takari:maven:wrapper
-  - ./mvnw install -DskipTests=true -Dmaven.javadoc.skip=true -B -V
+script: "mvn clean install -Dmaven.javadoc.skip=true -B -V"
 
 env:
   global:
     - CODECOV_TOKEN=:uuid-repo-token
+before_install:
+  - chmod +x mvnw
 
 after_success:
   - mvn clean integration-test
