@@ -9,5 +9,10 @@ git:
 
 script: "mvn clean install -Dmaven.javadoc.skip=true -B -V"
 
+env:
+  global:
+    - CODECOV_TOKEN=:uuid-repo-token
+
 after_success:
   - mvn clean integration-test
+  - bash <(curl -s https://codecov.io/bash)
