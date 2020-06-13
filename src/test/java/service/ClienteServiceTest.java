@@ -60,19 +60,6 @@ public class ClienteServiceTest {
         verify(clienteRepository, never()).save(any(Cliente.class));
     }
 
-/*    @Test
-    void updateUser() {
-        final Cidade cidade = new Cidade(null, "Lajeado", "RS");
-        final Cliente cliente = new Cliente(1L, "Pedro da Silva", "123123", "M", Instant.now(), 88, cidade);
-
-        given(clienteRepository.save(user)).willReturn(user);
-
-        final Cliente expected = clienteService.(user);
-
-        assertThat(expected).isNotNull();
-
-        verify(clienteRepository).save(any(Cliente.class));
-    }*/
 
     @Test
     public void shouldReturnFindAll() {
