@@ -1,25 +1,41 @@
 package com.rodrigoramos.controller.impl;
 
 
+import com.rodrigoramos.cadastroclientes.CadastroClientesApplication;
+import com.rodrigoramos.cadastroclientes.controller.impl.ClienteControllerImpl;
+import com.rodrigoramos.cadastroclientes.service.ClienteService;
+import org.hamcrest.Matchers;
+import org.junit.Before;
+import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.ArgumentMatchers;
+import org.mockito.InjectMocks;
+import org.mockito.Mockito;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
+import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
-@SpringBootTest
+@SpringBootTest(classes = CadastroClientesApplication.class)
 @AutoConfigureMockMvc
 @RunWith(SpringRunner.class)
 public class ClienteControllerImplTest {
     //TODO: create the data Test generator class ClienteBuilder
-   /* private static final String ENDPOINT_URL = "/clientes";
-    @MockBean
-    private ReferenceMapper referenceMapper;
+    private static final String ENDPOINT_URL = "/cadastro-clientes/v1/cliente";
+    /* @MockBean
+     private ReferenceMapper referenceMapper;*/
     @InjectMocks
     private ClienteControllerImpl clienteController;
     @MockBean
     private ClienteService clienteService;
-    @MockBean
-    private ClienteMapper clienteMapper;
+    /*    @MockBean
+        private ClienteMapper clienteMapper;*/
     @Autowired
     private MockMvc mockMvc;
 
@@ -28,7 +44,7 @@ public class ClienteControllerImplTest {
         this.mockMvc = MockMvcBuilders.standaloneSetup(this.clienteController).build();
     }
 
-    @Test
+/*    @Test
     public void getAll() throws Exception {
         Mockito.when(clienteMapper.asDTOList(ArgumentMatchers.any())).thenReturn(ClienteBuilder.getListDTO());
 
@@ -39,9 +55,9 @@ public class ClienteControllerImplTest {
                         .contentType(MediaType.APPLICATION_JSON_UTF8))
                 .andExpect(MockMvcResultMatchers.jsonPath("$", Matchers.hasSize(2)));
 
-    }
+    }*/
 
-    @Test
+/*    @Test
     public void getById() throws Exception {
         Mockito.when(clienteMapper.asDTO(ArgumentMatchers.any())).thenReturn(ClienteBuilder.getDTO());
 
@@ -70,7 +86,7 @@ public class ClienteControllerImplTest {
         Mockito.verifyNoMoreInteractions(clienteService);
     }
 
-*//*    @Test
+    @Test
     public void update() throws Exception {
         Mockito.when(clienteMapper.asEntity(ArgumentMatchers.any())).thenReturn(ClienteBuilder.getEntity());
         Mockito.when(clienteService.update(ArgumentMatchers.any(), ArgumentMatchers.anyLong())).thenReturn(ClienteBuilder.getEntity());
@@ -82,16 +98,19 @@ public class ClienteControllerImplTest {
                 .andExpect(MockMvcResultMatchers.status().isOk());
         Mockito.verify(clienteService, Mockito.times(1)).update(ArgumentMatchers.any(Cliente.class), ArgumentMatchers.anyLong());
         Mockito.verifyNoMoreInteractions(clienteService);
-    }*//*
-
-    @Test
-    public void delete() throws Exception {
-        Mockito.doNothing().when(clienteService).deleteById(ArgumentMatchers.anyLong());
-        mockMvc.perform(
-                MockMvcRequestBuilders.delete(ENDPOINT_URL + "/1"))
-                .andExpect(MockMvcResultMatchers.status().isOk());
-        Mockito.verify(clienteService, Mockito.times(1)).deleteById(Mockito.anyLong());
-        Mockito.verifyNoMoreInteractions(clienteService);
     }
-}*/
+*/
+//    @Test
+//    public void delete() throws Exception {
+//        Mockito.doNothing().when(clienteService).deleteById(ArgumentMatchers.anyLong());
+//        mockMvc.perform(
+//                MockMvcRequestBuilders.delete(ENDPOINT_URL + "/1"))
+//                .andExpect(MockMvcResultMatchers.status().isOk());
+//        Mockito.verify(clienteService, Mockito.times(1)).deleteById(Mockito.anyLong());
+//        Mockito.verifyNoMoreInteractions(clienteService);
+//    }
+    @Test
+    public void teste(){
+
+    }
 }
