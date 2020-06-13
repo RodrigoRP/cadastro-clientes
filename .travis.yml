@@ -2,15 +2,12 @@ dist: trusty
 language: java
 sudo: false
 jdk:
-  - oraclejdk9
   - oraclejdk8
-  - openjdk8
-  - openjdk7
 
 git:
   depth: 2 #clone repository to a maximum depth of 2 commits
 
-script: "mvn clean verify"
+script: "mvn clean install -Dmaven.javadoc.skip=true -B -V"
 
 after_success:
-  #- mvn clean integration-test
+  - mvn clean integration-test
