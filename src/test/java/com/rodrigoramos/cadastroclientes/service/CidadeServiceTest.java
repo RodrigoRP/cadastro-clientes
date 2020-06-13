@@ -1,4 +1,4 @@
-package service;
+package com.rodrigoramos.cadastroclientes.service;
 
 import com.rodrigoramos.cadastroclientes.model.Cidade;
 import com.rodrigoramos.cadastroclientes.model.Cliente;

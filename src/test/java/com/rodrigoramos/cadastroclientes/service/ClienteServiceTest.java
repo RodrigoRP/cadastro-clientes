@@ -1,15 +1,17 @@
-package service;
+package com.rodrigoramos.cadastroclientes.service;
 
 import com.rodrigoramos.cadastroclientes.model.Cidade;
 import com.rodrigoramos.cadastroclientes.model.Cliente;
 import com.rodrigoramos.cadastroclientes.repository.ClienteRepository;
 import com.rodrigoramos.cadastroclientes.service.exceptions.ClienteRegistrationException;
+import com.rodrigoramos.cadastroclientes.service.exceptions.ObjectNotFoundException;
 import com.rodrigoramos.cadastroclientes.service.impl.ClienteServiceImpl;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
+import org.springframework.dao.DataIntegrityViolationException;
 
 import java.time.Instant;
 import java.util.ArrayList;
@@ -77,7 +79,7 @@ public class ClienteServiceTest {
     }
 
     @Test
-    public void findUserById() {
+    public void findClienteById() {
         final Long id = 1L;
         final Cidade cidade = new Cidade(null, "Lajeado", "RS");
         final Cliente cliente = new Cliente(1L, "Pedro da Silva", "123123", "M", Instant.now(), 88, cidade);
@@ -87,6 +89,44 @@ public class ClienteServiceTest {
         final Cliente expected = clienteService.findById(id);
 
         assertThat(expected).isNotNull();
+    }
+
+    @Test
+    public void findClienteByNomeCompleto() {
+        final Long id = 1L;
+        final Cidade cidade = new Cidade(null, "Lajeado", "RS");
+        final Cliente cliente = new Cliente(1L, "Pedro da Silva", "123123", "M", Instant.now(), 88, cidade);
+
+        given(clienteRepository.findClienteByNomeCompleto(cliente.getNomeCompleto())).willReturn(Optional.of(cliente));
+
+        final Cliente expected = clienteService.findByNomeCompleto(cliente.getNomeCompleto());
+
+        assertThat(expected).isNotNull();
+    }
+
+    @Test
+    public void shouldThrowErrorWhenFindClienteByNomeCompleto() {
+        final Cidade cidade = new Cidade(null, "Lajeado", "RS");
+        final Cliente cliente = new Cliente(null, "Pedro da Silva", "123123", "M", Instant.now(), 88, cidade);
+
+        // given(clienteRepository.findById(id)).willReturn(Optional.of(cliente));
+
+        assertThrows(ObjectNotFoundException.class, () -> clienteService.findByNomeCompleto("Maria da Silva Silva"));
+
+        verify(clienteRepository, never()).findClienteByNomeCompleto("Marsadas");
+    }
+
+    @Test
+    public void shouldThrowErrorWhenFindClienteById() {
+        final Long id = 1L;
+        final Cidade cidade = new Cidade(null, "Lajeado", "RS");
+        final Cliente cliente = new Cliente(1L, "Pedro da Silva", "123123", "M", Instant.now(), 88, cidade);
+
+        // given(clienteRepository.findById(id)).willReturn(Optional.of(cliente));
+
+        assertThrows(ObjectNotFoundException.class, () -> clienteService.findById(2L));
+
+        verify(clienteRepository, never()).findById(22L);
     }
 
 
@@ -101,6 +141,44 @@ public class ClienteServiceTest {
         clienteService.deleteById(clientId);
 
         verify(clienteRepository, times(2)).deleteById(clientId);
+    }
+
+    @Test
+    public void shouldThrowErrorWhenBeDeleted() {
+        final Long id = 1L;
+        final Cidade cidade = new Cidade(null, "Lajeado", "RS");
+        final Cliente cliente = new Cliente(1L, "Pedro da Silva", "123123", "M", Instant.now(), 88, cidade);
+
+        // given(clienteRepository.findById(id)).willReturn(Optional.of(cliente));
+
+        assertThrows(ObjectNotFoundException.class, () -> clienteService.deleteById(2L));
+
+        verify(clienteRepository, never()).deleteById(22L);
+    }
+
+    @Test
+    public void findClienteByCpf() {
+        final Long id = 1L;
+        final Cidade cidade = new Cidade(null, "Lajeado", "RS");
+        final Cliente cliente = new Cliente(1L, "Pedro da Silva", "123123", "M", Instant.now(), 88, cidade);
+
+        given(clienteRepository.findClienteByCpf(cliente.getCpf())).willReturn(Optional.of(cliente));
+
+        final Cliente expected = clienteService.findClienteByCpf(cliente.getCpf());
+
+        assertThat(expected).isNotNull();
+    }
+
+    @Test
+    public void shouldThrowErrorWhenFindClienteByCpf() {
+        final Cidade cidade = new Cidade(null, "Lajeado", "RS");
+        final Cliente cliente = new Cliente(null, "Pedro da Silva", "123123", "M", Instant.now(), 88, cidade);
+
+        // given(clienteRepository.findById(id)).willReturn(Optional.of(cliente));
+
+        assertThrows(ObjectNotFoundException.class, () -> clienteService.findClienteByCpf("123124424"));
+
+        verify(clienteRepository, never()).findClienteByCpf("23131231fd");
     }
 
 
