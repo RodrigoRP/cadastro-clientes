@@ -17,4 +17,4 @@ before_install:
 
 after_success:
   - mvn clean integration-test
-  - bash <(curl -s https://codecov.io/bash)
+  - bash <(curl -s https://codecov.io/bash) -t 4934d03c-5850-4c72-a2d3-1a3c7407fd99
