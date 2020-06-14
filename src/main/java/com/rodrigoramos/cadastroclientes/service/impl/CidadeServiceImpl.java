@@ -6,6 +6,8 @@ import com.rodrigoramos.cadastroclientes.service.CidadeService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @AllArgsConstructor
 @Service
 public class CidadeServiceImpl implements CidadeService {
@@ -23,7 +25,7 @@ public class CidadeServiceImpl implements CidadeService {
     }
 
     @Override
-    public Cidade findCidadeByEstado(String estado) {
+    public List<Cidade> findCidadeByEstado(String estado) {
         return cidadeRepository.findCidadeByEstado(estado);
     }
 }

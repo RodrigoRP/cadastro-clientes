@@ -8,6 +8,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 
+import java.util.List;
+
 @Api(tags = "Cidade API")
 public interface CidadeController {
 
@@ -17,6 +19,6 @@ public interface CidadeController {
     @ApiOperation("Buscar cliente pelo nome")
     ResponseEntity<Cidade> findByNome(@PathVariable String nome);
 
-    @ApiOperation("Buscar cliente pelo estado")
-    ResponseEntity<Cidade> findByEstado(@PathVariable String estado);
+    @ApiOperation("Listar todas cidades por estado")
+    ResponseEntity<List<Cidade>> findByEstado(@PathVariable String estado);
 }

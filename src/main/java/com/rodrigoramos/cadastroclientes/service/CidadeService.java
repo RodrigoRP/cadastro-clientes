@@ -2,11 +2,13 @@ package com.rodrigoramos.cadastroclientes.service;
 
 import com.rodrigoramos.cadastroclientes.model.Cidade;
 
+import java.util.List;
+
 public interface CidadeService {
 
     Cidade save(Cidade cidade);
 
     Cidade findCidadeByNome(String nome);
 
-    Cidade findCidadeByEstado(String estado);
+    List<Cidade> findCidadeByEstado(String estado);
 }

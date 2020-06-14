@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
+import java.util.List;
 
 @RequiredArgsConstructor
 @RestController
@@ -41,8 +42,9 @@ public class CidadeControllerImpl implements CidadeController {
     }
 
     @Override
-    public ResponseEntity<Cidade> findByEstado(@PathVariable("estado")String estado) {
-        Cidade cidade = cidadeService.findCidadeByEstado(estado);
+    @GetMapping("/estado/{estado}")
+    public ResponseEntity<List<Cidade>> findByEstado(@PathVariable("estado")String estado) {
+        List<Cidade> cidade = cidadeService.findCidadeByEstado(estado);
         return ResponseEntity.ok().body(cidade);
     }
 }
