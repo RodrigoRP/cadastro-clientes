@@ -1,21 +1,19 @@
 package com.rodrigoramos.cadastroclientes.service;
 
 import com.rodrigoramos.cadastroclientes.model.Cidade;
-import com.rodrigoramos.cadastroclientes.model.Cliente;
 import com.rodrigoramos.cadastroclientes.repository.CidadeRepository;
 import com.rodrigoramos.cadastroclientes.service.impl.CidadeServiceImpl;
 import org.junit.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
-import org.mockito.junit.jupiter.MockitoExtension;
 
-import java.time.Instant;
-import java.util.Optional;
+import java.util.ArrayList;
+import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.verify;
@@ -55,6 +53,17 @@ public class CidadeServiceTest {
         assertThat(expected).isNotNull();
     }
 
+    @Test
+    public void findCidadeByEstado() {
+        List<Cidade> cidades = new ArrayList<>();
+        cidades.add(new Cidade(null, "Lajeado", "RS"));
+
+        given(cidadeRepository.findCidadeByEstado("RS")).willReturn(cidades);
+
+        List<Cidade> expected = cidadeService.findCidadeByEstado("RS");
+
+        assertEquals(expected, cidades);
+    }
 
 
 }
