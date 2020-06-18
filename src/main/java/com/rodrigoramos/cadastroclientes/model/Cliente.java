@@ -17,7 +17,6 @@ public class Cliente extends Auditable<String> {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String nomeCompleto;
-
     private String cpf;
     private String sexo;
     private Instant dataNascimento;
