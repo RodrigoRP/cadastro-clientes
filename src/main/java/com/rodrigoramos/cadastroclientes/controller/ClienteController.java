@@ -9,13 +9,14 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 
+import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
 @Api(tags = "Cliente API")
 public interface ClienteController {
 
     @ApiOperation("Add new data")
-    ResponseEntity<Cliente> save(@RequestBody ClienteDTO cliente);
+    ResponseEntity<Cliente> save(@RequestBody ClienteDTO cliente,  HttpServletResponse response);
 
     @ApiOperation("Find All")
     ResponseEntity<List<Cliente>> findAll();

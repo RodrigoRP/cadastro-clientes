@@ -29,7 +29,7 @@ public class CidadeControllerImpl implements CidadeController {
         cidade = cidadeService.save(cidade);
 
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
-                .path("/{id}").buildAndExpand(cidade.getId()).toUri();
+                .path("/{id}").buildAndExpand(cidade.getNome()).toUri();
 
         return ResponseEntity.created(uri).body(cidade);
     }

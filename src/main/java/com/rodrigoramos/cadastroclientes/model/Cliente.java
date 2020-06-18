@@ -11,12 +11,13 @@ import java.time.Instant;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-public class Cliente {
+public class Cliente extends Auditable<String> {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String nomeCompleto;
+
     private String cpf;
     private String sexo;
     private Instant dataNascimento;

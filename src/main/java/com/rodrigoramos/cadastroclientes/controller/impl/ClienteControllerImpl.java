@@ -5,14 +5,18 @@ import com.rodrigoramos.cadastroclientes.controller.constants.RestConstants;
 import com.rodrigoramos.cadastroclientes.converter.ClienteConverter;
 import com.rodrigoramos.cadastroclientes.dto.ClienteDTO;
 import com.rodrigoramos.cadastroclientes.dto.ClienteUpdateDTO;
+import com.rodrigoramos.cadastroclientes.event.CreateResourceEvent;
 import com.rodrigoramos.cadastroclientes.model.Cliente;
 import com.rodrigoramos.cadastroclientes.service.ClienteService;
 import com.rodrigoramos.cadastroclientes.utils.JsonNullableUtils;
 import lombok.RequiredArgsConstructor;
+import org.springframework.context.ApplicationEventPublisher;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import javax.servlet.http.HttpServletResponse;
 import java.net.URI;
 import java.util.List;
 
@@ -23,17 +27,15 @@ public class ClienteControllerImpl implements ClienteController {
 
     private final ClienteService clienteService;
     private final ClienteConverter clienteConverter;
+    private final ApplicationEventPublisher publisher;
 
     @Override
     @PostMapping
-    public ResponseEntity<Cliente> save(@RequestBody ClienteDTO clienteDTO) {
+    public ResponseEntity<Cliente> save(@RequestBody ClienteDTO clienteDTO, HttpServletResponse response) {
         Cliente cliente = clienteConverter.convertToEntity(clienteDTO);
         cliente = clienteService.save(cliente);
-
-        URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
-                .path("/{id}").buildAndExpand(cliente.getId()).toUri();
-
-        return ResponseEntity.created(uri).body(cliente);
+        publisher.publishEvent(new CreateResourceEvent(this, response, cliente.getId()));
+        return ResponseEntity.status(HttpStatus.CREATED).body(cliente);
     }
 
     @Override
