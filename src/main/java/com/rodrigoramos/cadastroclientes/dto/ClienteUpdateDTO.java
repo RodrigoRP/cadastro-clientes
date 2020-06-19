@@ -13,4 +13,7 @@ public class ClienteUpdateDTO {
     @NotNull
     private JsonNullable<String> nomeCompleto = JsonNullable.undefined();
 
+    protected ClienteUpdateDTO() {
+    }
+
 }

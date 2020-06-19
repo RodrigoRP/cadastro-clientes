@@ -16,7 +16,7 @@ public interface CidadeController {
     @ApiOperation("Cadastrar novo cliente")
     ResponseEntity<Cidade> save(@RequestBody CidadeDTO cidadeDTO);
 
-    @ApiOperation("Buscar cliente pelo nome")
+    @ApiOperation("Buscar cidade pelo nome")
     ResponseEntity<Cidade> findByNome(@PathVariable String nome);
 
     @ApiOperation("Listar todas cidades por estado")

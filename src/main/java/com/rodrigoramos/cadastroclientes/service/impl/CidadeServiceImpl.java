@@ -1,12 +1,15 @@
 package com.rodrigoramos.cadastroclientes.service.impl;
 
 import com.rodrigoramos.cadastroclientes.model.Cidade;
+import com.rodrigoramos.cadastroclientes.model.Cliente;
 import com.rodrigoramos.cadastroclientes.repository.CidadeRepository;
 import com.rodrigoramos.cadastroclientes.service.CidadeService;
+import com.rodrigoramos.cadastroclientes.service.exceptions.ObjectNotFoundException;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @AllArgsConstructor
 @Service
@@ -17,6 +20,13 @@ public class CidadeServiceImpl implements CidadeService {
     @Override
     public Cidade save(Cidade cidade) {
         return cidadeRepository.save(cidade);
+    }
+
+    @Override
+    public Cidade findById(Long id) {
+        Optional<Cidade> optionalCidade = cidadeRepository.findById(id);
+        return optionalCidade.orElseThrow(() -> new ObjectNotFoundException(
+                "Cidade não encontrada! Id: " + id + ", Tipo: " + Cidade.class.getName()));
     }
 
     @Override

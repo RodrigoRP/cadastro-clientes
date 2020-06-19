@@ -8,6 +8,7 @@ class CadastroClientesApplicationTests {
 
     @Test
     void contextLoads() {
+
     }
 
 }

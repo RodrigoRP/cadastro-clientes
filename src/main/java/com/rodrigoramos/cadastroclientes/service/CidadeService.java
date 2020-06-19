@@ -8,7 +8,10 @@ public interface CidadeService {
 
     Cidade save(Cidade cidade);
 
+    Cidade findById(Long id);
+
     Cidade findCidadeByNome(String nome);
 
     List<Cidade> findCidadeByEstado(String estado);
+
 }

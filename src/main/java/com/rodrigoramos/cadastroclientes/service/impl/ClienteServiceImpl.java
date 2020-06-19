@@ -23,10 +23,10 @@ public class ClienteServiceImpl implements ClienteService {
 
     @Override
     public Cliente save(Cliente cliente) {
-        Optional<Cliente> clienteOptional = repository.findClienteByCpf(cliente.getCpf());
-        if (clienteOptional.isPresent()) {
-            throw new ClienteRegistrationException("Cliente com o CPF " + cliente.getCpf() + " já existe");
-        }
+//        Optional<Cliente> clienteOptional = repository.findClienteByCpf(cliente.getCpf());
+//        if (clienteOptional.isPresent()) {
+//            throw new ClienteRegistrationException("Cliente com o CPF " + cliente.getCpf() + " já existe");
+//        }
         return repository.save(cliente);
     }
 

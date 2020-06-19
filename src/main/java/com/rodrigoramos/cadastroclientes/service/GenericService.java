@@ -1,7 +1,5 @@
 package com.rodrigoramos.cadastroclientes.service;
 
-import com.rodrigoramos.cadastroclientes.model.Cliente;
-
 import java.util.List;
 
 public interface GenericService<E, M> {

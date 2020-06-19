@@ -3,7 +3,7 @@ package com.rodrigoramos.cadastroclientes.model;
 import lombok.*;
 
 import javax.persistence.*;
-import java.time.Instant;
+import java.time.LocalDate;
 
 @Builder
 @Getter
@@ -19,7 +19,7 @@ public class Cliente extends Auditable<String> {
     private String nomeCompleto;
     private String cpf;
     private String sexo;
-    private Instant dataNascimento;
+    private LocalDate dataNascimento;
     private Integer idade;
 
     @OneToOne

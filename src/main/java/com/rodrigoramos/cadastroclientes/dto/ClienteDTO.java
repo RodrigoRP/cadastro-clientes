@@ -3,6 +3,7 @@ package com.rodrigoramos.cadastroclientes.dto;
 import lombok.*;
 
 import java.time.Instant;
+import java.time.LocalDate;
 
 @Getter
 @Setter
@@ -14,7 +15,7 @@ public class ClienteDTO {
     private String nomeCompleto;
     private String sexo;
     private String cpf;
-    private Instant dataNascimento;
+    private LocalDate dataNascimento;
     private Integer idade;
     private String cidade;
 

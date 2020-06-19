@@ -1,4 +1,4 @@
-package com.rodrigoramos.cadastroclientes.service;
+package com.rodrigoramos.cadastroclientes;
 
 import com.rodrigoramos.cadastroclientes.model.Cidade;
 import com.rodrigoramos.cadastroclientes.model.Cliente;
@@ -11,9 +11,9 @@ import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
-import org.springframework.dao.DataIntegrityViolationException;
 
-import java.time.Instant;
+import java.time.LocalDate;
+import java.time.Month;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -36,8 +36,10 @@ public class ClienteServiceTest {
 
     @Test
     public void shouldSavedClienteSuccessFully() {
+        
         final Cidade cidade = new Cidade(null, "Lajeado", "RS");
-        final Cliente cliente = new Cliente(null, "Pedro da Silva", "123123", "M", Instant.now(), 88, cidade);
+        final Cliente cliente = new Cliente(null, "Pedro da Silva", "123123", "M",
+                LocalDate.of(1960, Month.JANUARY, 1), 88, cidade);
 
 //        given(clienteRepository.findClienteByNomeCompleto(cliente.getNomeCompleto())).willReturn(Optional.empty());
         given(clienteRepository.save(cliente)).willAnswer(invocation -> invocation.getArgument(0));
@@ -53,7 +55,8 @@ public class ClienteServiceTest {
     @Test
     public void shouldThrowErrorWhenSaveUserWithExistingEmail() {
         final Cidade cidade = new Cidade(null, "Lajeado", "RS");
-        final Cliente cliente = new Cliente(1L, "Pedro da Silva", "123123", "M", Instant.now(), 88, cidade);
+        final Cliente cliente = new Cliente(1L, "Pedro da Silva", "123123", "M",
+                LocalDate.of(1960, Month.JANUARY, 1), 88, cidade);
 
         given(clienteRepository.findClienteByCpf(cliente.getCpf())).willReturn(Optional.of(cliente));
 
@@ -67,9 +70,9 @@ public class ClienteServiceTest {
     public void shouldReturnFindAll() {
         List<Cliente> datas = new ArrayList();
         final Cidade cidade = new Cidade(null, "Lajeado", "RS");
-        datas.add(new Cliente(1L, "Pedro da Silva", "1231", "M", Instant.now(), 88, cidade));
-        datas.add(new Cliente(2L, "Pedro da Silva", "12312", "M", Instant.now(), 88, cidade));
-        datas.add(new Cliente(3L, "Pedro da Silva", "123123", "M", Instant.now(), 88, cidade));
+        datas.add(new Cliente(1L, "Pedro da Silva", "1231", "M",LocalDate.of(1960, Month.JANUARY, 1), 88, cidade));
+        datas.add(new Cliente(2L, "Pedro da Silva", "12312", "M",LocalDate.of(1960, Month.JANUARY, 1), 88, cidade));
+        datas.add(new Cliente(3L, "Pedro da Silva", "123123", "M",LocalDate.of(1960, Month.JANUARY, 1), 88, cidade));
 
         given(clienteRepository.findAll()).willReturn(datas);
 
@@ -82,7 +85,7 @@ public class ClienteServiceTest {
     public void findClienteById() {
         final Long id = 1L;
         final Cidade cidade = new Cidade(null, "Lajeado", "RS");
-        final Cliente cliente = new Cliente(1L, "Pedro da Silva", "123123", "M", Instant.now(), 88, cidade);
+        final Cliente cliente = new Cliente(1L, "Pedro da Silva", "123123", "M",LocalDate.of(1960, Month.JANUARY, 1), 88, cidade);
 
         given(clienteRepository.findById(id)).willReturn(Optional.of(cliente));
 
@@ -95,7 +98,7 @@ public class ClienteServiceTest {
     public void findClienteByNomeCompleto() {
         final Long id = 1L;
         final Cidade cidade = new Cidade(null, "Lajeado", "RS");
-        final Cliente cliente = new Cliente(1L, "Pedro da Silva", "123123", "M", Instant.now(), 88, cidade);
+        final Cliente cliente = new Cliente(1L, "Pedro da Silva", "123123", "M",LocalDate.of(1960, Month.JANUARY, 1), 88, cidade);
 
         given(clienteRepository.findClienteByNomeCompleto(cliente.getNomeCompleto())).willReturn(Optional.of(cliente));
 
@@ -107,7 +110,7 @@ public class ClienteServiceTest {
     @Test
     public void shouldThrowErrorWhenFindClienteByNomeCompleto() {
         final Cidade cidade = new Cidade(null, "Lajeado", "RS");
-        final Cliente cliente = new Cliente(null, "Pedro da Silva", "123123", "M", Instant.now(), 88, cidade);
+        final Cliente cliente = new Cliente(null, "Pedro da Silva", "123123", "M",LocalDate.of(1960, Month.JANUARY, 1), 88, cidade);
 
         // given(clienteRepository.findById(id)).willReturn(Optional.of(cliente));
 
@@ -120,7 +123,7 @@ public class ClienteServiceTest {
     public void shouldThrowErrorWhenFindClienteById() {
         final Long id = 1L;
         final Cidade cidade = new Cidade(null, "Lajeado", "RS");
-        final Cliente cliente = new Cliente(1L, "Pedro da Silva", "123123", "M", Instant.now(), 88, cidade);
+        final Cliente cliente = new Cliente(1L, "Pedro da Silva", "123123", "M",LocalDate.of(1960, Month.JANUARY, 1), 88, cidade);
 
         // given(clienteRepository.findById(id)).willReturn(Optional.of(cliente));
 
@@ -134,7 +137,7 @@ public class ClienteServiceTest {
     public void shouldBeDeleted() {
         final Long clientId = 1L;
         final Cidade cidade = new Cidade(null, "Lajeado", "RS");
-        final Cliente cliente = new Cliente(1L, "Pedro da Silva", "1", "M", Instant.now(), 88, cidade);
+        final Cliente cliente = new Cliente(1L, "Pedro da Silva", "1", "M",LocalDate.of(1960, Month.JANUARY, 1), 88, cidade);
 
         given(clienteRepository.findById(cliente.getId())).willReturn(Optional.of(cliente));
         clienteService.deleteById(clientId);
@@ -147,7 +150,7 @@ public class ClienteServiceTest {
     public void shouldThrowErrorWhenBeDeleted() {
         final Long id = 1L;
         final Cidade cidade = new Cidade(null, "Lajeado", "RS");
-        final Cliente cliente = new Cliente(1L, "Pedro da Silva", "123123", "M", Instant.now(), 88, cidade);
+        final Cliente cliente = new Cliente(1L, "Pedro da Silva", "123123", "M",LocalDate.of(1960, Month.JANUARY, 1), 88, cidade);
 
         // given(clienteRepository.findById(id)).willReturn(Optional.of(cliente));
 
@@ -160,7 +163,7 @@ public class ClienteServiceTest {
     public void findClienteByCpf() {
         final Long id = 1L;
         final Cidade cidade = new Cidade(null, "Lajeado", "RS");
-        final Cliente cliente = new Cliente(1L, "Pedro da Silva", "123123", "M", Instant.now(), 88, cidade);
+        final Cliente cliente = new Cliente(1L, "Pedro da Silva", "123123", "M",LocalDate.of(1960, Month.JANUARY, 1), 88, cidade);
 
         given(clienteRepository.findClienteByCpf(cliente.getCpf())).willReturn(Optional.of(cliente));
 
@@ -172,7 +175,7 @@ public class ClienteServiceTest {
     @Test
     public void shouldThrowErrorWhenFindClienteByCpf() {
         final Cidade cidade = new Cidade(null, "Lajeado", "RS");
-        final Cliente cliente = new Cliente(null, "Pedro da Silva", "123123", "M", Instant.now(), 88, cidade);
+        final Cliente cliente = new Cliente(null, "Pedro da Silva", "123123", "M",LocalDate.of(1960, Month.JANUARY, 1), 88, cidade);
 
         // given(clienteRepository.findById(id)).willReturn(Optional.of(cliente));
 
