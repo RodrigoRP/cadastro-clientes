@@ -1,7 +1,6 @@
 package com.rodrigoramos.cadastroclientes.service.impl;
 
 import com.rodrigoramos.cadastroclientes.model.Cidade;
-import com.rodrigoramos.cadastroclientes.model.Cliente;
 import com.rodrigoramos.cadastroclientes.repository.CidadeRepository;
 import com.rodrigoramos.cadastroclientes.service.CidadeService;
 import com.rodrigoramos.cadastroclientes.service.exceptions.ObjectNotFoundException;

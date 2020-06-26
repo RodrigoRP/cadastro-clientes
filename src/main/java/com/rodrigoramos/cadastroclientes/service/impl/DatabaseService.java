@@ -4,19 +4,19 @@ import com.rodrigoramos.cadastroclientes.model.Cidade;
 import com.rodrigoramos.cadastroclientes.model.Cliente;
 import com.rodrigoramos.cadastroclientes.repository.CidadeRepository;
 import com.rodrigoramos.cadastroclientes.repository.ClienteRepository;
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.time.Month;
 import java.util.Arrays;
 
-@AllArgsConstructor
+@RequiredArgsConstructor
 @Service
 public class DatabaseService {
 
-    private CidadeRepository cidadeRepository;
-    private ClienteRepository clienteRepository;
+    private final CidadeRepository cidadeRepository;
+    private final ClienteRepository clienteRepository;
 
     public void instantiateDatabase() {
         LocalDate birthday = LocalDate.of(1960, Month.JANUARY, 1);

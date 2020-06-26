@@ -3,14 +3,13 @@ package com.rodrigoramos.cadastroclientes;
 import com.rodrigoramos.cadastroclientes.model.Cidade;
 import com.rodrigoramos.cadastroclientes.model.Cliente;
 import com.rodrigoramos.cadastroclientes.repository.ClienteRepository;
-import com.rodrigoramos.cadastroclientes.service.exceptions.ClienteRegistrationException;
 import com.rodrigoramos.cadastroclientes.service.exceptions.ObjectNotFoundException;
 import com.rodrigoramos.cadastroclientes.service.impl.ClienteServiceImpl;
+import org.junit.Before;
 import org.junit.Test;
-import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.junit.MockitoJUnitRunner;
+import org.mockito.MockitoAnnotations;
 
 import java.time.LocalDate;
 import java.time.Month;
@@ -25,7 +24,7 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.*;
 
-@RunWith(MockitoJUnitRunner.class)
+//@RunWith(MockitoJUnitRunner.class)
 public class ClienteServiceTest {
 
     @Mock
@@ -33,6 +32,11 @@ public class ClienteServiceTest {
 
     @InjectMocks
     private ClienteServiceImpl clienteService;
+
+    @Before
+    public void init() {
+        MockitoAnnotations.initMocks(this);
+    }
 
     @Test
     public void shouldSavedClienteSuccessFully() {
@@ -52,7 +56,7 @@ public class ClienteServiceTest {
 
     }
 
-    @Test
+/*    @Test
     public void shouldThrowErrorWhenSaveUserWithExistingEmail() {
         final Cidade cidade = new Cidade(null, "Lajeado", "RS");
         final Cliente cliente = new Cliente(1L, "Pedro da Silva", "123123", "M",
@@ -63,7 +67,7 @@ public class ClienteServiceTest {
         assertThrows(ClienteRegistrationException.class, () -> clienteService.save(cliente));
 
         verify(clienteRepository, never()).save(any(Cliente.class));
-    }
+    }*/
 
 
     @Test

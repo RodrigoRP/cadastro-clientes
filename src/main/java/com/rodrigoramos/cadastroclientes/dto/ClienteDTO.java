@@ -2,7 +2,6 @@ package com.rodrigoramos.cadastroclientes.dto;
 
 import lombok.*;
 
-import java.time.Instant;
 import java.time.LocalDate;
 
 @Getter

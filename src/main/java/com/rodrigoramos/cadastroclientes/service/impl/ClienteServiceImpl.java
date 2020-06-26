@@ -3,7 +3,6 @@ package com.rodrigoramos.cadastroclientes.service.impl;
 import com.rodrigoramos.cadastroclientes.model.Cliente;
 import com.rodrigoramos.cadastroclientes.repository.ClienteRepository;
 import com.rodrigoramos.cadastroclientes.service.ClienteService;
-import com.rodrigoramos.cadastroclientes.service.exceptions.ClienteRegistrationException;
 import com.rodrigoramos.cadastroclientes.service.exceptions.DataIntegrityException;
 import com.rodrigoramos.cadastroclientes.service.exceptions.ObjectNotFoundException;
 import lombok.AllArgsConstructor;
