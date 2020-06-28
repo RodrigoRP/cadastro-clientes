@@ -51,11 +51,7 @@ public class ClienteServiceImpl implements ClienteService {
     @Override
     public void deleteById(Long id) {
         findById(id);
-        try {
-            repository.deleteById(id);
-        } catch (DataIntegrityViolationException e) {
-            throw new DataIntegrityException("Não foi possível excluir!");
-        }
+        repository.deleteById(id);
     }
 
     @Override
@@ -65,7 +61,6 @@ public class ClienteServiceImpl implements ClienteService {
         return cliente.orElseThrow(() -> new ObjectNotFoundException(
                 "Cliente não encontrado! CPF: " + cpf + ", Tipo: " + Cliente.class.getName()));
     }
-
 
 
 }

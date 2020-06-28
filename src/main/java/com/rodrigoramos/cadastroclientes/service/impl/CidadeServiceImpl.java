@@ -5,16 +5,17 @@ import com.rodrigoramos.cadastroclientes.repository.CidadeRepository;
 import com.rodrigoramos.cadastroclientes.service.CidadeService;
 import com.rodrigoramos.cadastroclientes.service.exceptions.ObjectNotFoundException;
 import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
-@AllArgsConstructor
+@RequiredArgsConstructor
 @Service
 public class CidadeServiceImpl implements CidadeService {
 
-    private CidadeRepository cidadeRepository;
+    private final CidadeRepository cidadeRepository;
 
     @Override
     public Cidade save(Cidade cidade) {
