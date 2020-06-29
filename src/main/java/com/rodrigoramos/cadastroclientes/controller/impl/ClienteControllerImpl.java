@@ -6,6 +6,7 @@ import com.rodrigoramos.cadastroclientes.converter.ClienteConverter;
 import com.rodrigoramos.cadastroclientes.dto.ClienteDTO;
 import com.rodrigoramos.cadastroclientes.dto.ClienteUpdateDTO;
 import com.rodrigoramos.cadastroclientes.event.CreateResourceEvent;
+import com.rodrigoramos.cadastroclientes.mapper.ClienteMapper;
 import com.rodrigoramos.cadastroclientes.model.Cliente;
 import com.rodrigoramos.cadastroclientes.service.ClienteService;
 import com.rodrigoramos.cadastroclientes.utils.JsonNullableUtils;
@@ -24,13 +25,13 @@ import java.util.List;
 public class ClienteControllerImpl implements ClienteController {
 
     private final ClienteService clienteService;
-    private final ClienteConverter clienteConverter;
+    private final ClienteMapper mapper;
     private final ApplicationEventPublisher publisher;
 
     @Override
     @PostMapping
     public ResponseEntity<Cliente> save(@RequestBody ClienteDTO clienteDTO, HttpServletResponse response) {
-        Cliente cliente = clienteConverter.convertToEntity(clienteDTO);
+        Cliente cliente = mapper.toModel(clienteDTO);
         cliente = clienteService.save(cliente);
         publisher.publishEvent(new CreateResourceEvent(this, response, cliente.getId()));
         return ResponseEntity.status(HttpStatus.CREATED).body(cliente);

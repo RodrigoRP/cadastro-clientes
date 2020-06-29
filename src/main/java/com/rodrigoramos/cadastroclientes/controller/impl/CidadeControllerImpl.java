@@ -4,6 +4,7 @@ import com.rodrigoramos.cadastroclientes.controller.CidadeController;
 import com.rodrigoramos.cadastroclientes.controller.constants.RestConstants;
 import com.rodrigoramos.cadastroclientes.converter.CidadeConverter;
 import com.rodrigoramos.cadastroclientes.dto.CidadeDTO;
+import com.rodrigoramos.cadastroclientes.mapper.CidadeMapper;
 import com.rodrigoramos.cadastroclientes.model.Cidade;
 import com.rodrigoramos.cadastroclientes.service.CidadeService;
 import lombok.RequiredArgsConstructor;
@@ -20,12 +21,12 @@ import java.util.List;
 public class CidadeControllerImpl implements CidadeController {
 
     private final CidadeService cidadeService;
-    private final CidadeConverter cidadeConverter;
+    private final CidadeMapper mapper;
 
     @Override
     @PostMapping("/")
     public ResponseEntity<Cidade> save(CidadeDTO cidadeDTO) {
-        Cidade cidade = cidadeConverter.convertToEntity(cidadeDTO);
+        Cidade cidade = mapper.toModel(cidadeDTO);
         cidade = cidadeService.save(cidade);
 
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
