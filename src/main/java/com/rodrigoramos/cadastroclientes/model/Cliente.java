@@ -1,5 +1,7 @@
 package com.rodrigoramos.cadastroclientes.model;
 
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
 import lombok.*;
 
 import javax.persistence.*;
@@ -19,10 +21,13 @@ public class Cliente extends Auditable<String> {
     private String nomeCompleto;
     private String cpf;
     private String sexo;
+
+    @JsonSerialize(using = ToStringSerializer.class)
     private LocalDate dataNascimento;
+
     private Integer idade;
 
     @OneToOne(cascade = CascadeType.ALL)
-    private Cidade cidade;
+    private Address address;
 
 }

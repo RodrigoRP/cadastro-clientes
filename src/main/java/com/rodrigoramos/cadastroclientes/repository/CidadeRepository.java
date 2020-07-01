@@ -1,14 +1,14 @@
 package com.rodrigoramos.cadastroclientes.repository;
 
-import com.rodrigoramos.cadastroclientes.model.Cidade;
+import com.rodrigoramos.cadastroclientes.model.Address;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
 
-public interface CidadeRepository extends JpaRepository<Cidade, Long> {
+public interface CidadeRepository extends JpaRepository<Address, Long> {
 
-    Cidade findCidadeByNome(String nome);
+    Address findCidadeByNome(String nome);
 
-    List<Cidade> findCidadeByEstado(String estado);
+    List<Address> findCidadeByEstado(String estado);
 
 }

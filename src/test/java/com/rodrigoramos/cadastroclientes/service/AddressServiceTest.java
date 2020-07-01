@@ -1,6 +1,6 @@
 package com.rodrigoramos.cadastroclientes.service;
 
-import com.rodrigoramos.cadastroclientes.model.Cidade;
+import com.rodrigoramos.cadastroclientes.model.Address;
 import com.rodrigoramos.cadastroclientes.repository.CidadeRepository;
 import com.rodrigoramos.cadastroclientes.service.exceptions.ObjectNotFoundException;
 import com.rodrigoramos.cadastroclientes.service.impl.CidadeServiceImpl;
@@ -23,7 +23,7 @@ import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
 
 @RunWith(MockitoJUnitRunner.class)
-public class CidadeServiceTest {
+public class AddressServiceTest {
 
     @Mock
     private CidadeRepository cidadeRepository;
@@ -34,55 +34,55 @@ public class CidadeServiceTest {
 
     @Test
     public void shouldSavedCidadeSuccessFullyTest() {
-        final Cidade cidade = new Cidade(null, "Lajeado", "RS");
+        final Address address = new Address(null, "Lajeado", "RS");
 
-        given(cidadeRepository.save(cidade)).willAnswer(invocation -> invocation.getArgument(0));
+        given(cidadeRepository.save(address)).willAnswer(invocation -> invocation.getArgument(0));
 
-        Cidade savedCidade = cidadeService.save(cidade);
+        Address savedAddress = cidadeService.save(address);
 
-        assertThat(savedCidade).isNotNull();
+        assertThat(savedAddress).isNotNull();
 
-        verify(cidadeRepository).save(any(Cidade.class));
+        verify(cidadeRepository).save(any(Address.class));
     }
 
     @Test
     public void findCidadeByNomeTest() {
 
-        final Cidade cidade = new Cidade(null, "Lajeado", "RS");
+        final Address address = new Address(null, "Lajeado", "RS");
 
-        given(cidadeRepository.findCidadeByNome(cidade.getNome())).willReturn(cidade);
+        given(cidadeRepository.findCidadeByNome(address.getNome())).willReturn(address);
 
-        final Cidade expected = cidadeService.findCidadeByNome(cidade.getNome());
+        final Address expected = cidadeService.findCidadeByNome(address.getNome());
 
         assertThat(expected).isNotNull();
     }
 
     @Test
     public void findCidadeByEstadoTest() {
-        List<Cidade> cidades = new ArrayList<>();
-        cidades.add(new Cidade(null, "Lajeado", "RS"));
+        List<Address> addresses = new ArrayList<>();
+        addresses.add(new Address(null, "Lajeado", "RS"));
 
-        given(cidadeRepository.findCidadeByEstado("RS")).willReturn(cidades);
+        given(cidadeRepository.findCidadeByEstado("RS")).willReturn(addresses);
 
-        List<Cidade> expected = cidadeService.findCidadeByEstado("RS");
+        List<Address> expected = cidadeService.findCidadeByEstado("RS");
 
-        assertEquals(expected, cidades);
+        assertEquals(expected, addresses);
     }
 
     @Test
     public void findCidadeByIdTest() {
-        final Cidade cidade = new Cidade(null, "Lajeado", "RS");
+        final Address address = new Address(null, "Lajeado", "RS");
 
-        given(cidadeRepository.findById(cidade.getId())).willReturn(Optional.of(cidade));
+        given(cidadeRepository.findById(address.getId())).willReturn(Optional.of(address));
 
-        Cidade expected = cidadeService.findById(cidade.getId());
+        Address expected = cidadeService.findById(address.getId());
 
-        assertEquals(expected, cidade);
+        assertEquals(expected, address);
     }
 
     @Test
     public void shouldThrowErrorWhenFindClienteByIdTest() {
-        final Cidade cidade = new Cidade(null, "Lajeado", "RS");
+        final Address address = new Address(null, "Lajeado", "RS");
 
         assertThrows(ObjectNotFoundException.class, () -> cidadeService.findById(2L));
 

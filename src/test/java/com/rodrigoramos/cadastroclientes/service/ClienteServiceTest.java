@@ -1,6 +1,6 @@
 package com.rodrigoramos.cadastroclientes.service;
 
-import com.rodrigoramos.cadastroclientes.model.Cidade;
+import com.rodrigoramos.cadastroclientes.model.Address;
 import com.rodrigoramos.cadastroclientes.model.Cliente;
 import com.rodrigoramos.cadastroclientes.repository.ClienteRepository;
 import com.rodrigoramos.cadastroclientes.service.exceptions.ObjectNotFoundException;
@@ -41,9 +41,9 @@ public class ClienteServiceTest {
     @Test
     public void shouldSavedClienteSuccessFully() {
 
-        final Cidade cidade = new Cidade(null, "Lajeado", "RS");
+        final Address address = new Address(null, "Lajeado", "RS");
         final Cliente cliente = new Cliente(null, "Pedro da Silva", "123123", "M",
-                LocalDate.of(1960, Month.JANUARY, 1), 88, cidade);
+                LocalDate.of(1960, Month.JANUARY, 1), 88, address);
 
 //        given(clienteRepository.findClienteByNomeCompleto(cliente.getNomeCompleto())).willReturn(Optional.empty());
         given(clienteRepository.save(cliente)).willAnswer(invocation -> invocation.getArgument(0));
@@ -73,10 +73,10 @@ public class ClienteServiceTest {
     @Test
     public void shouldReturnFindAll() {
         List<Cliente> datas = new ArrayList();
-        final Cidade cidade = new Cidade(null, "Lajeado", "RS");
-        datas.add(new Cliente(1L, "Pedro da Silva", "1231", "M", LocalDate.of(1960, Month.JANUARY, 1), 88, cidade));
-        datas.add(new Cliente(2L, "Pedro da Silva", "12312", "M", LocalDate.of(1960, Month.JANUARY, 1), 88, cidade));
-        datas.add(new Cliente(3L, "Pedro da Silva", "123123", "M", LocalDate.of(1960, Month.JANUARY, 1), 88, cidade));
+        final Address address = new Address(null, "Lajeado", "RS");
+        datas.add(new Cliente(1L, "Pedro da Silva", "1231", "M", LocalDate.of(1960, Month.JANUARY, 1), 88, address));
+        datas.add(new Cliente(2L, "Pedro da Silva", "12312", "M", LocalDate.of(1960, Month.JANUARY, 1), 88, address));
+        datas.add(new Cliente(3L, "Pedro da Silva", "123123", "M", LocalDate.of(1960, Month.JANUARY, 1), 88, address));
 
         given(clienteRepository.findAll()).willReturn(datas);
 
@@ -88,8 +88,8 @@ public class ClienteServiceTest {
     @Test
     public void findClienteById() {
         final Long id = 1L;
-        final Cidade cidade = new Cidade(null, "Lajeado", "RS");
-        final Cliente cliente = new Cliente(1L, "Pedro da Silva", "123123", "M", LocalDate.of(1960, Month.JANUARY, 1), 88, cidade);
+        final Address address = new Address(null, "Lajeado", "RS");
+        final Cliente cliente = new Cliente(1L, "Pedro da Silva", "123123", "M", LocalDate.of(1960, Month.JANUARY, 1), 88, address);
 
         given(clienteRepository.findById(id)).willReturn(Optional.of(cliente));
 
@@ -101,8 +101,8 @@ public class ClienteServiceTest {
     @Test
     public void findClienteByNomeCompleto() {
         final Long id = 1L;
-        final Cidade cidade = new Cidade(null, "Lajeado", "RS");
-        final Cliente cliente = new Cliente(1L, "Pedro da Silva", "123123", "M", LocalDate.of(1960, Month.JANUARY, 1), 88, cidade);
+        final Address address = new Address(null, "Lajeado", "RS");
+        final Cliente cliente = new Cliente(1L, "Pedro da Silva", "123123", "M", LocalDate.of(1960, Month.JANUARY, 1), 88, address);
 
         given(clienteRepository.findClienteByNomeCompleto(cliente.getNomeCompleto())).willReturn(Optional.of(cliente));
 
@@ -113,8 +113,8 @@ public class ClienteServiceTest {
 
     @Test
     public void shouldThrowErrorWhenFindClienteByNomeCompleto() {
-        final Cidade cidade = new Cidade(null, "Lajeado", "RS");
-        final Cliente cliente = new Cliente(null, "Pedro da Silva", "123123", "M", LocalDate.of(1960, Month.JANUARY, 1), 88, cidade);
+        final Address address = new Address(null, "Lajeado", "RS");
+        final Cliente cliente = new Cliente(null, "Pedro da Silva", "123123", "M", LocalDate.of(1960, Month.JANUARY, 1), 88, address);
 
         // given(clienteRepository.findById(id)).willReturn(Optional.of(cliente));
 
@@ -126,8 +126,8 @@ public class ClienteServiceTest {
     @Test
     public void shouldThrowErrorWhenFindClienteById() {
         final Long id = 1L;
-        final Cidade cidade = new Cidade(null, "Lajeado", "RS");
-        final Cliente cliente = new Cliente(1L, "Pedro da Silva", "123123", "M", LocalDate.of(1960, Month.JANUARY, 1), 88, cidade);
+        final Address address = new Address(null, "Lajeado", "RS");
+        final Cliente cliente = new Cliente(1L, "Pedro da Silva", "123123", "M", LocalDate.of(1960, Month.JANUARY, 1), 88, address);
 
         // given(clienteRepository.findById(id)).willReturn(Optional.of(cliente));
 
@@ -140,8 +140,8 @@ public class ClienteServiceTest {
     @Test
     public void shouldBeDeleted() {
         final Long clientId = 1L;
-        final Cidade cidade = new Cidade(null, "Lajeado", "RS");
-        final Cliente cliente = new Cliente(1L, "Pedro da Silva", "1", "M", LocalDate.of(1960, Month.JANUARY, 1), 88, cidade);
+        final Address address = new Address(null, "Lajeado", "RS");
+        final Cliente cliente = new Cliente(1L, "Pedro da Silva", "1", "M", LocalDate.of(1960, Month.JANUARY, 1), 88, address);
 
         given(clienteRepository.findById(cliente.getId())).willReturn(Optional.of(cliente));
         clienteService.deleteById(clientId);
@@ -153,8 +153,8 @@ public class ClienteServiceTest {
     @Test
     public void shouldThrowErrorWhenBeDeleted() {
         final Long id = 1L;
-        final Cidade cidade = new Cidade(null, "Lajeado", "RS");
-        final Cliente cliente = new Cliente(1L, "Pedro da Silva", "123123", "M", LocalDate.of(1960, Month.JANUARY, 1), 88, cidade);
+        final Address address = new Address(null, "Lajeado", "RS");
+        final Cliente cliente = new Cliente(1L, "Pedro da Silva", "123123", "M", LocalDate.of(1960, Month.JANUARY, 1), 88, address);
 
         // given(clienteRepository.findById(id)).willReturn(Optional.of(cliente));
 
@@ -166,8 +166,8 @@ public class ClienteServiceTest {
     @Test
     public void findClienteByCpf() {
         final Long id = 1L;
-        final Cidade cidade = new Cidade(null, "Lajeado", "RS");
-        final Cliente cliente = new Cliente(1L, "Pedro da Silva", "123123", "M", LocalDate.of(1960, Month.JANUARY, 1), 88, cidade);
+        final Address address = new Address(null, "Lajeado", "RS");
+        final Cliente cliente = new Cliente(1L, "Pedro da Silva", "123123", "M", LocalDate.of(1960, Month.JANUARY, 1), 88, address);
 
         given(clienteRepository.findClienteByCpf(cliente.getCpf())).willReturn(Optional.of(cliente));
 
@@ -178,8 +178,8 @@ public class ClienteServiceTest {
 
     @Test
     public void shouldThrowErrorWhenFindClienteByCpf() {
-        final Cidade cidade = new Cidade(null, "Lajeado", "RS");
-        final Cliente cliente = new Cliente(null, "Pedro da Silva", "123123", "M", LocalDate.of(1960, Month.JANUARY, 1), 88, cidade);
+        final Address address = new Address(null, "Lajeado", "RS");
+        final Cliente cliente = new Cliente(null, "Pedro da Silva", "123123", "M", LocalDate.of(1960, Month.JANUARY, 1), 88, address);
 
         // given(clienteRepository.findById(id)).willReturn(Optional.of(cliente));
 

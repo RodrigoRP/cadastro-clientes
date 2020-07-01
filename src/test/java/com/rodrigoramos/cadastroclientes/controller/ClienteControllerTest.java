@@ -2,11 +2,11 @@ package com.rodrigoramos.cadastroclientes.controller;
 
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.rodrigoramos.cadastroclientes.dto.AddressDTO;
 import com.rodrigoramos.cadastroclientes.dto.ClienteDTO;
-import com.rodrigoramos.cadastroclientes.model.Cidade;
+import com.rodrigoramos.cadastroclientes.model.Address;
 import com.rodrigoramos.cadastroclientes.model.Cliente;
 import com.rodrigoramos.cadastroclientes.repository.ClienteRepository;
-import com.rodrigoramos.cadastroclientes.service.impl.ClienteServiceImpl;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -59,9 +59,9 @@ public class ClienteControllerTest {
 
     @Test
     public void buscar_id_200() throws Exception {
-        final Cidade cidade = new Cidade(null, "Lajeado", "RS");
+        final Address address = new Address(null, "Lajeado", "RS");
         final Cliente cliente = new Cliente(1L, "Pedro da Silva", "123123", "M",
-                LocalDate.of(1960, Month.JANUARY, 1), 88, cidade);
+                LocalDate.of(1960, Month.JANUARY, 1), 88, address);
 
         when(mockRepository.findById(1L)).thenReturn(Optional.of(cliente));
 
@@ -78,9 +78,9 @@ public class ClienteControllerTest {
 
     @Test
     public void find_nomeCompleto_200() throws Exception {
-        final Cidade cidade = new Cidade(null, "Lajeado", "RS");
+        final Address address = new Address(null, "Lajeado", "RS");
         final Cliente cliente = new Cliente(1L, "Pedro", "123123", "M",
-                LocalDate.of(1960, Month.JANUARY, 1), 88, cidade);
+                LocalDate.of(1960, Month.JANUARY, 1), 88, address);
 
         when(mockRepository.findClienteByNomeCompleto(cliente.getNomeCompleto())).thenReturn(Optional.of(cliente));
 
@@ -98,11 +98,11 @@ public class ClienteControllerTest {
     @Test
     public void find_all_200() throws Exception {
         List<Cliente> clienteList = new ArrayList<>();
-        final Cidade cidade = new Cidade(null, "Lajeado", "RS");
+        final Address address = new Address(null, "Lajeado", "RS");
         final Cliente cliente1 = new Cliente(1L, "Pedro", "123123", "M",
-                LocalDate.of(1960, Month.JANUARY, 1), 88, cidade);
+                LocalDate.of(1960, Month.JANUARY, 1), 88, address);
         final Cliente cliente2 = new Cliente(2L, "Maria", "123123", "F",
-                LocalDate.of(1960, Month.JANUARY, 1), 88, cidade);
+                LocalDate.of(1960, Month.JANUARY, 1), 88, address);
 
         clienteList.add(cliente1);
         clienteList.add(cliente2);
@@ -126,9 +126,9 @@ public class ClienteControllerTest {
 
     @Test
     public void deletar_200() throws Exception {
-        final Cidade cidade = new Cidade(null, "Lajeado", "RS");
+        final Address address = new Address(null, "Lajeado", "RS");
         final Cliente cliente = new Cliente(1L, "Pedro", "123123", "M",
-                LocalDate.of(1960, Month.JANUARY, 1), 88, cidade);
+                LocalDate.of(1960, Month.JANUARY, 1), 88, address);
 
         when(mockRepository.findById(1L)).thenReturn(Optional.of(cliente));
 
@@ -139,21 +139,21 @@ public class ClienteControllerTest {
     }
 
 
-//    @Test
-//    public void criar_200_v2() throws Exception {
-//        final ClienteDTO dto = new ClienteDTO("Pedro", "123123", "M",
-//                LocalDate.of(1960, Month.JANUARY, 1), 88, "Lajeado", "RS");
-//        final Cliente cliente = new Cliente(1L, "Pedro", "123123", "M",
-//                LocalDate.of(1960, Month.JANUARY, 1), 88, new Cidade(null, "Lajeado", "RS"));
-//
-//        when(mockRepository.save(any(Cliente.class))).thenReturn(cliente);
-//
-//        mockMvc.perform(post(BASE_URL + "/")
-//                .content(objectMapper.writeValueAsString(cliente))
-//                .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON))
-//                .andExpect(jsonPath("$.nomeCompleto", is("Pedro")));
-//
-//        verify(mockRepository, times(1)).save(any(Cliente.class));
-//    }
+    @Test
+    public void criar_200_v2() throws Exception {
+        final ClienteDTO dto = new ClienteDTO("Pedro", "123123", "M",
+                LocalDate.of(1960, Month.JANUARY, 1), 88, new AddressDTO( "Lajeado", "RS"));
+        final Cliente cliente = new Cliente(1L, "Pedro", "123123", "M",
+                LocalDate.now(), 88, new Address(null, "Lajeado", "RS"));
+
+        when(mockRepository.save(any(Cliente.class))).thenReturn(cliente);
+
+        mockMvc.perform(post(BASE_URL + "/")
+                .content(objectMapper.writeValueAsString(dto))
+                .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON))
+                .andExpect(status().isCreated());
+
+        verify(mockRepository, times(1)).save(any(Cliente.class));
+    }
 
 }

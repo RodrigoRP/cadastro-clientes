@@ -1,8 +1,7 @@
 package com.rodrigoramos.cadastroclientes.service.impl;
 
-import com.rodrigoramos.cadastroclientes.model.Cidade;
+import com.rodrigoramos.cadastroclientes.model.Address;
 import com.rodrigoramos.cadastroclientes.model.Cliente;
-import com.rodrigoramos.cadastroclientes.repository.CidadeRepository;
 import com.rodrigoramos.cadastroclientes.repository.ClienteRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -20,8 +19,8 @@ public class DatabaseService {
     public void instantiateDatabase() {
         LocalDate birthday = LocalDate.of(1960, Month.JANUARY, 1);
 
-        Cidade c1 = new Cidade(null, "Santa Maria", "RS");
-        Cidade c2 = new Cidade(null, "Santa Maria", "RS");
+        Address c1 = new Address(null, "Santa Maria", "RS");
+        Address c2 = new Address(null, "Santa Maria", "RS");
 
 
         Cliente cl1 = new Cliente(null, "Maria da Silva","123123", "F", birthday, 19, c1);

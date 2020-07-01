@@ -14,11 +14,8 @@ import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.net.URI;
 import java.util.List;
 
 @RequiredArgsConstructor
@@ -30,23 +27,13 @@ public class ClienteControllerImpl implements ClienteController {
     private final ClienteMapper mapper;
     private final ApplicationEventPublisher publisher;
 
-//    @Override
-//    @PostMapping("/")
-//    public ResponseEntity<Void> save(@RequestBody ClienteDTO clienteDTO, HttpServletResponse response) {
-//        Cliente cliente = mapper.toModel(clienteDTO);
-//        cliente = clienteService.save(cliente);
-//        publisher.publishEvent(new CreateResourceEvent(this, response, cliente.getId()));
-//        return ResponseEntity.status(HttpStatus.CREATED).build();
-//    }
-
     @Override
     @PostMapping("/")
-    public ResponseEntity<Void> save2(@RequestBody ClienteDTO clienteDTO) {
+    public ResponseEntity<Void> save(@RequestBody ClienteDTO clienteDTO, HttpServletResponse response) {
         Cliente cliente = mapper.toModel(clienteDTO);
         cliente = clienteService.save(cliente);
-        URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
-                .buildAndExpand(cliente.getId()).toUri();
-        return ResponseEntity.created(uri).build();
+        publisher.publishEvent(new CreateResourceEvent(this, response, cliente.getId()));
+        return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
 

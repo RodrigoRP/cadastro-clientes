@@ -15,11 +15,11 @@ import java.util.List;
 @Api(tags = "Cliente API")
 public interface ClienteController {
 
-//    @ApiOperation("Add new data")
-//    ResponseEntity<Void> save(@RequestBody ClienteDTO cliente,  HttpServletResponse response);
-
     @ApiOperation("Add new data")
-    ResponseEntity<Void> save2(@RequestBody ClienteDTO cliente);
+    ResponseEntity<Void> save(@RequestBody ClienteDTO cliente,  HttpServletResponse response);
+
+//    @ApiOperation("Add new data")
+//    ResponseEntity<Void> save2(@RequestBody ClienteDTO cliente);
 
     @ApiOperation("Find All")
     ResponseEntity<List<Cliente>> findAll();
