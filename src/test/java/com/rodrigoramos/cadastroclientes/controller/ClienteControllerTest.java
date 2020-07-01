@@ -6,6 +6,7 @@ import com.rodrigoramos.cadastroclientes.dto.ClienteDTO;
 import com.rodrigoramos.cadastroclientes.model.Cidade;
 import com.rodrigoramos.cadastroclientes.model.Cliente;
 import com.rodrigoramos.cadastroclientes.repository.ClienteRepository;
+import com.rodrigoramos.cadastroclientes.service.impl.ClienteServiceImpl;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -26,6 +27,7 @@ import java.util.List;
 import java.util.Optional;
 
 import static org.hamcrest.Matchers.is;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
@@ -136,28 +138,20 @@ public class ClienteControllerTest {
         verify(mockRepository, times(1)).deleteById(1L);
     }
 
+
 //    @Test
-//    public void criar_200() throws Exception {
-//        final ClienteDTO dto = ClienteDTO.builder()
-//                .nomeCompleto("Maria")
-//                .nomeCidade("Porto Alegre")
-//                .nomeEstado("RS")
-//                .cpf("12312")
-//                .idade(66)
-//                .sexo("F")
-//                .dataNascimento(LocalDate.of(1960, Month.JANUARY, 1))
-//                .build();
-//
-//        final Cidade cidade = new Cidade(null, "Lajeado", "RS");
+//    public void criar_200_v2() throws Exception {
+//        final ClienteDTO dto = new ClienteDTO("Pedro", "123123", "M",
+//                LocalDate.of(1960, Month.JANUARY, 1), 88, "Lajeado", "RS");
 //        final Cliente cliente = new Cliente(1L, "Pedro", "123123", "M",
-//                LocalDate.of(1960, Month.JANUARY, 1), 88, cidade);
+//                LocalDate.of(1960, Month.JANUARY, 1), 88, new Cidade(null, "Lajeado", "RS"));
 //
 //        when(mockRepository.save(any(Cliente.class))).thenReturn(cliente);
 //
 //        mockMvc.perform(post(BASE_URL + "/")
-//                .content(objectMapper.writeValueAsString(dto))
+//                .content(objectMapper.writeValueAsString(cliente))
 //                .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON))
-//                .andExpect(status().isCreated());
+//                .andExpect(jsonPath("$.nomeCompleto", is("Pedro")));
 //
 //        verify(mockRepository, times(1)).save(any(Cliente.class));
 //    }

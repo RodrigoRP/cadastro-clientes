@@ -15,7 +15,6 @@ import java.util.Arrays;
 @Service
 public class DatabaseService {
 
-    private final CidadeRepository cidadeRepository;
     private final ClienteRepository clienteRepository;
 
     public void instantiateDatabase() {
@@ -24,7 +23,6 @@ public class DatabaseService {
         Cidade c1 = new Cidade(null, "Santa Maria", "RS");
         Cidade c2 = new Cidade(null, "Santa Maria", "RS");
 
-        cidadeRepository.saveAll(Arrays.asList(c1, c2));
 
         Cliente cl1 = new Cliente(null, "Maria da Silva","123123", "F", birthday, 19, c1);
         Cliente cl2 = new Cliente(null, "Pedro da Silva", "M", "123123", birthday, 89, c2);

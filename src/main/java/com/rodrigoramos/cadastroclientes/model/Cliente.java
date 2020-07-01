@@ -22,7 +22,7 @@ public class Cliente extends Auditable<String> {
     private LocalDate dataNascimento;
     private Integer idade;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     private Cidade cidade;
 
 }
