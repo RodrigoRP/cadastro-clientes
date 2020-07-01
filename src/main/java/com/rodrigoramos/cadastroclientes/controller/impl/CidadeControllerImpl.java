@@ -2,7 +2,6 @@ package com.rodrigoramos.cadastroclientes.controller.impl;
 
 import com.rodrigoramos.cadastroclientes.controller.CidadeController;
 import com.rodrigoramos.cadastroclientes.controller.constants.RestConstants;
-import com.rodrigoramos.cadastroclientes.converter.CidadeConverter;
 import com.rodrigoramos.cadastroclientes.dto.CidadeDTO;
 import com.rodrigoramos.cadastroclientes.mapper.CidadeMapper;
 import com.rodrigoramos.cadastroclientes.model.Cidade;

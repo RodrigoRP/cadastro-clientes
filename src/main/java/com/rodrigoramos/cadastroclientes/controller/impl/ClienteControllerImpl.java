@@ -2,7 +2,6 @@ package com.rodrigoramos.cadastroclientes.controller.impl;
 
 import com.rodrigoramos.cadastroclientes.controller.ClienteController;
 import com.rodrigoramos.cadastroclientes.controller.constants.RestConstants;
-import com.rodrigoramos.cadastroclientes.converter.ClienteConverter;
 import com.rodrigoramos.cadastroclientes.dto.ClienteDTO;
 import com.rodrigoramos.cadastroclientes.dto.ClienteUpdateDTO;
 import com.rodrigoramos.cadastroclientes.event.CreateResourceEvent;
@@ -29,7 +28,7 @@ public class ClienteControllerImpl implements ClienteController {
     private final ApplicationEventPublisher publisher;
 
     @Override
-    @PostMapping
+    @PostMapping("/")
     public ResponseEntity<Cliente> save(@RequestBody ClienteDTO clienteDTO, HttpServletResponse response) {
         Cliente cliente = mapper.toModel(clienteDTO);
         cliente = clienteService.save(cliente);

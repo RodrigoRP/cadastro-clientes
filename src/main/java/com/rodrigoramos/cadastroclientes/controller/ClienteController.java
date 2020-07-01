@@ -30,14 +30,6 @@ public interface ClienteController {
     @ApiOperation("Delete by id")
     ResponseEntity<Void> deleteClienteById(@PathVariable("id") Long id);
 
-    /*
-    @ApiOperation("Find all data")
-    public List<ClienteDTO> list();
-
-    @ApiOperation("Pagination request")
-    public Page<ClienteDTO> pageQuery(Pageable pageable);
-*/
-
     @ApiOperation("Update one data")
     ResponseEntity<Void> updateCliente(@PathVariable("id") Long id, @RequestBody ClienteUpdateDTO clienteUpdateDTO);
 }

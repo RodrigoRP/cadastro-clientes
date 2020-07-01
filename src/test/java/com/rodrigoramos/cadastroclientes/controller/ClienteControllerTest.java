@@ -2,9 +2,9 @@ package com.rodrigoramos.cadastroclientes.controller;
 
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.rodrigoramos.cadastroclientes.dto.ClienteDTO;
 import com.rodrigoramos.cadastroclientes.model.Cidade;
 import com.rodrigoramos.cadastroclientes.model.Cliente;
-import com.rodrigoramos.cadastroclientes.repository.CidadeRepository;
 import com.rodrigoramos.cadastroclientes.repository.ClienteRepository;
 import org.junit.Before;
 import org.junit.Test;
@@ -12,23 +12,23 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
-
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
-
-import static org.hamcrest.Matchers.is;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.*;
 
 import java.time.LocalDate;
 import java.time.Month;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+
+import static org.hamcrest.Matchers.is;
+import static org.mockito.Mockito.*;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -135,5 +135,31 @@ public class ClienteControllerTest {
 
         verify(mockRepository, times(1)).deleteById(1L);
     }
+
+//    @Test
+//    public void criar_200() throws Exception {
+//        final ClienteDTO dto = ClienteDTO.builder()
+//                .nomeCompleto("Maria")
+//                .nomeCidade("Porto Alegre")
+//                .nomeEstado("RS")
+//                .cpf("12312")
+//                .idade(66)
+//                .sexo("F")
+//                .dataNascimento(LocalDate.of(1960, Month.JANUARY, 1))
+//                .build();
+//
+//        final Cidade cidade = new Cidade(null, "Lajeado", "RS");
+//        final Cliente cliente = new Cliente(1L, "Pedro", "123123", "M",
+//                LocalDate.of(1960, Month.JANUARY, 1), 88, cidade);
+//
+//        when(mockRepository.save(any(Cliente.class))).thenReturn(cliente);
+//
+//        mockMvc.perform(post(BASE_URL + "/")
+//                .content(objectMapper.writeValueAsString(dto))
+//                .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON))
+//                .andExpect(status().isCreated());
+//
+//        verify(mockRepository, times(1)).save(any(Cliente.class));
+//    }
 
 }

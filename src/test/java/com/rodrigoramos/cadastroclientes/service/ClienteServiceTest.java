@@ -1,7 +1,5 @@
 package com.rodrigoramos.cadastroclientes.service;
 
-import com.rodrigoramos.cadastroclientes.dto.ClienteDTO;
-import com.rodrigoramos.cadastroclientes.mapper.ClienteMapper;
 import com.rodrigoramos.cadastroclientes.model.Cidade;
 import com.rodrigoramos.cadastroclientes.model.Cliente;
 import com.rodrigoramos.cadastroclientes.repository.ClienteRepository;

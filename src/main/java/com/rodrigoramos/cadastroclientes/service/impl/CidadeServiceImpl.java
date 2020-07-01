@@ -4,7 +4,6 @@ import com.rodrigoramos.cadastroclientes.model.Cidade;
 import com.rodrigoramos.cadastroclientes.repository.CidadeRepository;
 import com.rodrigoramos.cadastroclientes.service.CidadeService;
 import com.rodrigoramos.cadastroclientes.service.exceptions.ObjectNotFoundException;
-import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
